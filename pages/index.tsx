@@ -29,7 +29,7 @@ export default function Home() {
         <div className="max-w-prose grid gap-4 grid-cols-3 my-10">
           <div className="flex justify-center">
             <a
-              href="https://github.com/aergonaut"
+              href="https://twitter.com/aergonaut"
               title="Twitter"
               className="text-gray-500 hover:text-gray-900"
             >
@@ -47,7 +47,7 @@ export default function Home() {
           </div>
           <div className="flex justify-center">
             <a
-              href="https://github.com/aergonaut"
+              href="https://linkedin.com/in/chrisfung"
               title="LinkedIn"
               className="text-gray-500 hover:text-gray-900"
             >
