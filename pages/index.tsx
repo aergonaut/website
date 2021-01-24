@@ -1,7 +1,9 @@
 import Head from "next/head";
+import Link from "next/link";
 import { GitHub, Linkedin, Twitter } from "react-feather";
+import { getAllPosts, Post } from "../lib/util";
 
-export default function Home() {
+export default function Home({ posts }: { posts: Post[] }) {
   return (
     <div>
       <Head>
@@ -26,36 +28,62 @@ export default function Home() {
           Lead Digital Weaver at <a href="https://coupa.com">Coupa</a>.
         </p>
 
-        <div className="max-w-prose grid gap-4 grid-cols-3 my-10">
-          <div className="flex justify-center">
-            <a
-              href="https://twitter.com/aergonaut"
-              title="Twitter"
-              className="text-gray-500 hover:text-gray-900"
-            >
-              <Twitter />
-            </a>
-          </div>
-          <div className="flex justify-center">
-            <a
-              href="https://github.com/aergonaut"
-              title="GitHub"
-              className="text-gray-500 hover:text-gray-900"
-            >
-              <GitHub />
-            </a>
-          </div>
-          <div className="flex justify-center">
-            <a
-              href="https://linkedin.com/in/chrisfung"
-              title="LinkedIn"
-              className="text-gray-500 hover:text-gray-900"
-            >
-              <Linkedin />
-            </a>
-          </div>
-        </div>
+        <section className="my-10">
+          <h2 className="font-bold text-lg sm:text-xl lg:text-2xl">Writing</h2>
+          <ul className="divide-y divide-gray-200">
+            {posts.map((post) => {
+              return (
+                <li className="px-4 py-4 sm:px-0">
+                  <Link href={`/posts/${post.slug}`}>
+                    <a
+                      className="hover:text-indigo-600 hover:underline"
+                      title={post.title}
+                    >
+                      {post.title}
+                    </a>
+                  </Link>
+                </li>
+              );
+            })}
+          </ul>
+        </section>
       </main>
+      <footer className="mx-auto max-w-prose grid gap-4 grid-cols-3">
+        <div className="flex justify-center">
+          <a
+            href="https://twitter.com/aergonaut"
+            title="Twitter"
+            className="text-gray-500 hover:text-gray-900"
+          >
+            <Twitter />
+          </a>
+        </div>
+        <div className="flex justify-center">
+          <a
+            href="https://github.com/aergonaut"
+            title="GitHub"
+            className="text-gray-500 hover:text-gray-900"
+          >
+            <GitHub />
+          </a>
+        </div>
+        <div className="flex justify-center">
+          <a
+            href="https://linkedin.com/in/chrisfung"
+            title="LinkedIn"
+            className="text-gray-500 hover:text-gray-900"
+          >
+            <Linkedin />
+          </a>
+        </div>
+      </footer>
     </div>
   );
+}
+
+export async function getStaticProps() {
+  const posts = getAllPosts();
+  return {
+    props: { posts },
+  };
 }
